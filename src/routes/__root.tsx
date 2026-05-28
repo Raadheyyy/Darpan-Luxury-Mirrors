@@ -74,20 +74,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Darpan" },
+      { title: "Darpan Luxury Mirrors | Jaipur" },
       {
         name: "description",
         content:
           "Darpan crafts luxury backlit LED mirrors for premium residences — heritage Indian craftsmanship from Jaipur, meet modern lighting.",
       },
-      { property: "og:title", content: "Darpan" },
+      { property: "og:title", content: "Darpan Luxury Mirrors | Jaipur" },
       {
         property: "og:description",
         content: "Reflecting beauty. Illuminating spaces. Handcrafted in Jaipur.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Darpan" },
+      { name: "twitter:title", content: "Darpan Luxury Mirrors | Jaipur" },
       { name: "description", content: "Darpan" },
       { property: "og:description", content: "Darpan" },
       { name: "twitter:description", content: "Darpan" },
@@ -96,6 +96,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -138,4 +141,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-

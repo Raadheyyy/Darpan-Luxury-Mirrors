@@ -12,13 +12,13 @@ const links = [
 export function SiteNav() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--color-border)]/70 bg-[var(--color-ivory)]/92 shadow-[0_1px_0_rgba(91,70,48,0.03)] backdrop-blur-xl">
+    <header className="site-nav-entry sticky top-0 z-40 border-b border-[var(--color-border)]/70 bg-[var(--color-ivory)]/92 shadow-[0_1px_0_rgba(91,70,48,0.03)] backdrop-blur-xl">
       <div className="mx-auto grid h-[76px] max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-5 px-5 lg:h-20 lg:px-10">
         <Link to="/" className="flex items-center shrink-0" aria-label="Darpan home">
           <img
             src="/logo-nav-wordmark-transparent.png"
             alt="Darpan"
-            className="h-auto w-[128px] object-contain opacity-90 mix-blend-multiply sm:w-[146px]"
+            className="h-auto w-[136px] object-contain sm:w-[158px]"
           />
         </Link>
 

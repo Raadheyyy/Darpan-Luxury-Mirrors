@@ -110,18 +110,59 @@
 /* Brand intro splash */
 @keyframes brand-intro-fade {
   0%   { opacity: 1; }
-  70%  { opacity: 1; }
+  72%  { opacity: 1; }
   100% { opacity: 0; visibility: hidden; }
 }
-.brand-intro { animation: brand-intro-fade 1.35s ease-in-out forwards; }
+.brand-intro {
+  animation: brand-intro-fade 1.45s ease-in-out forwards;
+  overflow: hidden;
+}
+
+.brand-intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(182, 138, 76, 0.1), transparent 18rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 28%, rgba(182, 138, 76, 0.035));
+  opacity: 0.8;
+}
+
+.brand-intro::after {
+  content: "";
+  position: absolute;
+  inset: 28px;
+  border: 1px solid rgba(211, 178, 125, 0.08);
+  pointer-events: none;
+}
+
+.brand-intro-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(56vw, 520px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(182, 138, 76, 0.12), transparent 64%);
+  filter: blur(18px);
+}
 
 @keyframes brand-intro-mark {
-  0%   { opacity: 0; transform: translateY(8px) scale(0.96); }
-  35%  { opacity: 1; transform: translateY(0) scale(1); }
-  75%  { opacity: 1; transform: translateY(0) scale(1); }
-  100% { opacity: 0; transform: translateY(-4px) scale(1.01); }
+  0%   { opacity: 0; transform: translateY(10px) scale(0.98); filter: blur(8px); }
+  28%  { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  76%  { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  100% { opacity: 0; transform: translateY(-6px) scale(1.01); filter: blur(5px); }
 }
-.brand-intro-mark > * { animation: brand-intro-mark 1.35s ease-out forwards; }
+.brand-intro-mark > * { animation: brand-intro-mark 1.45s ease-out forwards; }
+
+@keyframes site-nav-enter {
+  0%   { opacity: 0; transform: translateY(-14px); filter: blur(8px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+.site-nav-entry {
+  animation: site-nav-enter 0.85s cubic-bezier(0.22, 0.8, 0.2, 1) 0.55s both;
+  will-change: opacity, transform, filter;
+}
 
 /* Hero cinematic reveal — starts after intro (~1.35s) */
 @keyframes hero-mirror-reveal {
