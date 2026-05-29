@@ -16,9 +16,9 @@ export function SiteNav() {
       <div className="mx-auto grid h-[76px] max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-5 px-5 lg:h-20 lg:px-10">
         <Link to="/" className="flex items-center shrink-0" aria-label="Darpan home">
           <img
-            src="/logo-nav-wordmark-transparent.png"
+            src="/logo-nav-secondary-wordmark.png"
             alt="Darpan"
-            className="h-auto w-[136px] object-contain sm:w-[158px]"
+            className="h-auto w-[130px] object-contain sm:w-[150px]"
           />
         </Link>
 
