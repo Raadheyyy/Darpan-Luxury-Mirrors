@@ -4,7 +4,7 @@ export function BrandIntro() {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
-    const t = setTimeout(() => setShow(false), 1350);
+    const t = setTimeout(() => setShow(false), 2650);
     return () => clearTimeout(t);
   }, []);
 

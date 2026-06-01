@@ -9,6 +9,7 @@ import {
   formatPrice,
   SHAPE_ORDER,
   SHAPE_LABEL,
+  type Product,
   type Shape,
 } from "@/lib/products";
 
@@ -27,7 +28,7 @@ function Shop() {
   const [filter, setFilter] = useState<Shape | "All">("All");
   const [sort, setSort] = useState<SortKey>("featured");
 
-  const grouped = useMemo(() => {
+  const visibleProducts = useMemo(() => {
     const all = filter === "All" ? products : products.filter((p) => p.shape === filter);
     const sortFn = (a: typeof all[number], b: typeof all[number]) => {
       switch (sort) {
@@ -41,15 +42,19 @@ function Shop() {
           return 0;
       }
     };
-    const out: { shape: Shape; items: typeof all }[] = [];
+    return [...all].sort(sortFn);
+  }, [filter, sort]);
+
+  const grouped = useMemo(() => {
+    const out: { shape: Shape; items: Product[] }[] = [];
     SHAPE_ORDER.forEach((s) => {
-      const items = all.filter((p) => p.shape === s).sort(sortFn);
+      const items = visibleProducts.filter((p) => p.shape === s);
       if (items.length) out.push({ shape: s, items });
     });
     return out;
-  }, [filter, sort]);
+  }, [visibleProducts]);
 
-  const totalCount = filter === "All" ? products.length : grouped.reduce((n, g) => n + g.items.length, 0);
+  const totalCount = visibleProducts.length;
 
   return (
     <>
@@ -126,71 +131,81 @@ function Shop() {
           </p>
         )}
 
-        <div className="space-y-28">
-          {grouped.map((group) => (
-            <div key={group.shape} id={group.shape.toLowerCase()}>
-              <Reveal className="mb-12 flex items-end justify-between gap-6 border-b border-[var(--color-border)] pb-6">
-                <div>
-                  <p className="eyebrow text-[var(--color-gold)]">
-                    {String(SHAPE_ORDER.indexOf(group.shape) + 1).padStart(2, "0")} ·{" "}
-                    {group.shape}
+        {filter === "All" ? (
+          <ProductGrid items={visibleProducts} />
+        ) : (
+          <div className="space-y-28">
+            {grouped.map((group) => (
+              <div key={group.shape} id={group.shape.toLowerCase()}>
+                <Reveal className="mb-12 flex items-end justify-between gap-6 border-b border-[var(--color-border)] pb-6">
+                  <div>
+                    <p className="eyebrow text-[var(--color-gold)]">
+                      {String(SHAPE_ORDER.indexOf(group.shape) + 1).padStart(2, "0")} ·{" "}
+                      {group.shape}
+                    </p>
+                    <h2 className="mt-3 font-display text-3xl text-[var(--color-brown-deep)] sm:text-4xl">
+                      {SHAPE_LABEL[group.shape]}
+                    </h2>
+                  </div>
+                  <p className="eyebrow shrink-0 pb-2 text-[var(--color-taupe)]">
+                    {group.items.length} {group.items.length === 1 ? "piece" : "pieces"}
                   </p>
-                  <h2 className="mt-3 font-display text-3xl text-[var(--color-brown-deep)] sm:text-4xl">
-                    {SHAPE_LABEL[group.shape]}
-                  </h2>
-                </div>
-                <p className="eyebrow shrink-0 pb-2 text-[var(--color-taupe)]">
-                  {group.items.length} {group.items.length === 1 ? "piece" : "pieces"}
-                </p>
-              </Reveal>
+                </Reveal>
 
-              <div className="grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
-                {group.items.map((p, i) => (
-                  <Reveal key={p.slug} delay={i * 80}>
-                    <Link
-                      to="/shop/$slug"
-                      params={{ slug: p.slug }}
-                      className="group block"
-                    >
-                      <ArchFrame
-                        variant={p.shape === "Round" ? "round" : p.shape === "Arch" ? "arch" : "rect"}
-                        className={`w-full bg-[var(--color-sandstone)] ${
-                          p.shape === "Round" ? "aspect-square" : "aspect-[3/4]"
-                        }`}
-                      >
-                        <img
-                          src={p.image}
-                          alt={p.name}
-                          width={1024}
-                          height={1280}
-                          loading="lazy"
-                          className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
-                        />
-                      </ArchFrame>
-                      <div className="mt-5 flex items-start justify-between gap-4">
-                        <div>
-                          <p className="eyebrow text-[var(--color-taupe)]">{p.shape}</p>
-                          <h3 className="mt-2 font-display text-2xl text-[var(--color-brown-deep)]">
-                            {p.name}
-                          </h3>
-                          <p className="mt-1.5 text-sm italic text-[var(--color-taupe)]">
-                            {p.tagline}
-                          </p>
-                        </div>
-                        <p className="shrink-0 font-display text-lg text-[var(--color-brown)]">
-                          {formatPrice(p.price)}
-                        </p>
-                      </div>
-                    </Link>
-                  </Reveal>
-                ))}
+                <ProductGrid items={group.items} />
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
 
       <SiteFooter />
     </>
+  );
+}
+
+function ProductGrid({ items }: { items: Product[] }) {
+  return (
+    <div className="grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((p, i) => (
+        <Reveal key={p.slug} delay={i * 80}>
+          <Link
+            to="/shop/$slug"
+            params={{ slug: p.slug }}
+            className="group block"
+          >
+            <ArchFrame
+              variant={p.shape === "Round" ? "round" : p.shape === "Arch" ? "arch" : "rect"}
+              className={`w-full bg-[var(--color-sandstone)] ${
+                p.shape === "Round" ? "aspect-square" : "aspect-[3/4]"
+              }`}
+            >
+              <img
+                src={p.image}
+                alt={p.name}
+                width={1024}
+                height={1280}
+                loading="lazy"
+                className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
+              />
+            </ArchFrame>
+            <div className="mt-5 flex items-start justify-between gap-4">
+              <div>
+                <p className="eyebrow text-[var(--color-taupe)]">{p.shape}</p>
+                <h3 className="mt-2 font-display text-2xl text-[var(--color-brown-deep)]">
+                  {p.name}
+                </h3>
+                <p className="mt-1.5 text-sm italic text-[var(--color-taupe)]">
+                  {p.tagline}
+                </p>
+              </div>
+              <p className="shrink-0 font-display text-lg text-[var(--color-brown)]">
+                {formatPrice(p.price)}
+              </p>
+            </div>
+          </Link>
+        </Reveal>
+      ))}
+    </div>
   );
 }
