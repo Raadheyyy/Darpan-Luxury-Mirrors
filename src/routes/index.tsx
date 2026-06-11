@@ -6,7 +6,7 @@ import { Reveal } from "@/components/brand/Reveal";
 import { FeaturedCarousel } from "@/components/brand/FeaturedCarousel";
 
 import heroMirror from "@/assets/mirror-hero.png";
-import craft from "@/assets/craftsmanship.jpg";
+import mirrorCloseup from "@/assets/darpan-mirror-closeup.jpg";
 import heritage from "@/assets/heritage.jpg";
 
 export const Route = createFileRoute("/")({ component: Home });
@@ -89,9 +89,9 @@ function Home() {
         <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 sm:grid-cols-2 md:grid-cols-4 lg:px-10">
           {[
             { label: "Heritage", desc: "Rooted in Jaipur's living craft." },
-            { label: "Craftsmanship", desc: "Hand-finished, made-to-order." },
-            { label: "Innovation", desc: "Tunable warm-to-cool LED light." },
-            { label: "Reflection", desc: "Designed for slow, daily rituals." },
+            { label: "Strength", desc: "Deep frames, rigid brackets, secure installation." },
+            { label: "Lighting", desc: "Warm LED channels built to be serviced." },
+            { label: "Finish", desc: "Premium mirror glass with polished safety edges." },
           ].map((p) => (
             <div key={p.label}>
               <p className="eyebrow text-[var(--color-gold-soft)]">{p.label}</p>
@@ -106,11 +106,11 @@ function Home() {
         <Reveal className="flex flex-col items-center text-center">
           <p className="eyebrow">The Collection</p>
           <h2 className="mt-4 max-w-2xl font-display text-4xl text-[var(--color-brown-deep)] sm:text-5xl">
-            Modern silhouettes, infinite light.
+            Premium mirrors with a permanent, architectural presence.
           </h2>
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-[var(--color-brown)]/75">
-            Hand-finished in brass, teak, marble and enamel. Each piece is made to
-            order, with custom sizing and tunable light.
+            From warm vanity halos to carved designer frames, each Darpan piece is
+            made to order with protected lighting, solid profiles and reliable mounting.
           </p>
           <div className="hairline mt-8 w-32" />
         </Reveal>
@@ -135,8 +135,8 @@ function Home() {
         <div className="mx-auto grid max-w-7xl gap-16 px-6 py-28 md:grid-cols-2 md:items-center lg:px-10">
           <Reveal className="relative aspect-[3/4] w-full overflow-hidden">
             <img
-              src={craft}
-              alt="An artisan polishing a brass mirror frame in Jaipur"
+              src={mirrorCloseup}
+              alt="Close-up of a Darpan illuminated mirror frame and wall glow"
               width={1400}
               height={1600}
               loading="lazy"
@@ -147,20 +147,19 @@ function Home() {
           <Reveal delay={120}>
             <p className="eyebrow">Craftsmanship</p>
             <h2 className="mt-4 font-display text-4xl leading-tight text-[var(--color-brown-deep)] sm:text-5xl">
-              Hands that have shaped brass for generations.
+              Built like a fixture, finished like a luxury object.
             </h2>
             <div className="hairline mt-8 w-24" />
             <p className="mt-8 text-base leading-relaxed text-[var(--color-brown)]/85">
-              Every Darpan mirror begins in a small Jaipur workshop, where master
-              artisans cut, polish and finish each brass bezel by hand. We pair their
-              centuries-old craft with quietly engineered LED panels — warm, tunable,
-              and built to last a generation.
+              Every Darpan mirror is planned as a long-term installation: a deep
+              engineered frame, protected LED channel, polished mirror edge and concealed
+              mounting system. The result feels substantial on the wall and refined up close.
             </p>
             <ul className="mt-8 space-y-3 text-sm text-[var(--color-brown)]/90">
-              <li>· Hand-finished brass, polished to a soft sheen.</li>
-              <li>· Tunable warm-to-cool LED, 2700K – 5000K.</li>
-              <li>· Made-to-order in 4–6 weeks.</li>
-              <li>· White-glove delivery across India.</li>
+              <li>· Copper-free mirror glass with polished safety edges.</li>
+              <li>· Sealed LED channels and serviceable concealed drivers.</li>
+              <li>· Rigid brackets for secure wall mounting.</li>
+              <li>· Made to order in 4-6 weeks with premium packing.</li>
             </ul>
             <Link
               to="/journey"

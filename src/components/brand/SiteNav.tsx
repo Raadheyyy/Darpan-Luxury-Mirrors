@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { CartDrawer } from "@/components/cart/CartDrawer";
 
 const links = [
   { to: "/shop", label: "Collection" },
@@ -35,32 +36,36 @@ export function SiteNav() {
           ))}
         </nav>
 
-        <div className="hidden justify-self-end lg:block">
+        <div className="hidden items-center justify-self-end gap-3 lg:flex">
           <Link
             to="/shop"
             className="eyebrow inline-flex items-center gap-2 border border-[var(--color-gold)]/70 px-5 py-2.5 text-[0.62rem] text-[var(--color-brown)] transition-colors hover:bg-[var(--color-gold)] hover:text-[var(--color-ivory)]"
           >
             Shop Mirrors
           </Link>
+          <CartDrawer />
         </div>
 
-        <button
-          aria-label="Open menu"
-          onClick={() => setOpen((v) => !v)}
-          className="justify-self-end p-2 text-[var(--color-brown)] lg:hidden"
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
-            {open ? (
-              <path d="M6 6 L18 18 M18 6 L6 18" />
-            ) : (
-              <>
-                <line x1="3" y1="7" x2="21" y2="7" />
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="17" x2="21" y2="17" />
-              </>
-            )}
-          </svg>
-        </button>
+        <div className="flex items-center justify-self-end gap-2 lg:hidden">
+          <CartDrawer />
+          <button
+            aria-label="Open menu"
+            onClick={() => setOpen((v) => !v)}
+            className="p-2 text-[var(--color-brown)]"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+              {open ? (
+                <path d="M6 6 L18 18 M18 6 L6 18" />
+              ) : (
+                <>
+                  <line x1="3" y1="7" x2="21" y2="7" />
+                  <line x1="3" y1="12" x2="21" y2="12" />
+                  <line x1="3" y1="17" x2="21" y2="17" />
+                </>
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
 
       {open && (
@@ -76,6 +81,13 @@ export function SiteNav() {
                 {l.label}
               </Link>
             ))}
+            <Link
+              to="/cart"
+              onClick={() => setOpen(false)}
+              className="eyebrow py-3.5 text-[var(--color-brown)]"
+            >
+              Cart
+            </Link>
           </nav>
         </div>
       )}

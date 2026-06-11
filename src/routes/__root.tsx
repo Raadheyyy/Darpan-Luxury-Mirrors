@@ -8,6 +8,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { BrandIntro } from "@/components/brand/BrandIntro";
+import { CartProvider } from "@/lib/cart-context";
 
 
 import appCss from "../styles.css?url";
@@ -134,10 +135,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BrandIntro />
-      <div key={pathname} className="page-enter">
-        <Outlet />
-      </div>
+      <CartProvider>
+        <BrandIntro />
+        <div key={pathname} className="page-enter">
+          <Outlet />
+        </div>
+      </CartProvider>
     </QueryClientProvider>
   );
 }

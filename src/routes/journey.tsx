@@ -18,7 +18,7 @@ const chapters = [
   {
     year: "2025",
     title: "Darpan opens its doors.",
-    body: "Our atelier in C-Scheme, Jaipur, opens to architects and private clients. The first collection — Oval Bloom, Jharokha Arch, Round Halo and Classic Rectangle — is made to order.",
+    body: "Our atelier in C-Scheme, Jaipur, opens to architects and private clients. The first collection brings together designer statement mirrors, warm vanity halos and solid framed LED pieces, all made to order.",
   },
   {
     year: "Today",
